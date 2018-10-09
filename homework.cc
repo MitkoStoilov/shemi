@@ -48,7 +48,10 @@ bool AreParanthesesBalanced(string exp)
 int sen(string exp,int x)
 {
 	int words = 0;
-	for(int i =0;i<exp.length();i++)
+	int i = 0;
+	if((exp[i]>='a'&& exp[i] <= 'z')||(exp[i]>='A'&& exp[i] <= 'Z'))
+		words++;
+	for(i =0;i<exp.length();i++)
 	{
 		if(exp[i]=='.')
 			break;
@@ -92,33 +95,40 @@ int main() {
 			x=rio(s);
 			count--;
 		}
-		if(s == "strict")
+		if(s.find("strict") != string::npos)
 		{
 			asdf=1;
 			count--;
 		}
-		if(asdf==1);
+		if(x!=0){
+			count += sen(s, x);
+			if(asdf==1&&sen(s, x)==1)
 			{
-				
 				if(!AreParanthesesBalanced(s))
 				{	
 					i = 0;
 				}
 			}
-		if(x!=0){
-			count += sen(s, x);
 		}	
+		else
+		{
+			if(asdf==1)
+				if(!AreParanthesesBalanced(s))
+				{	
+					i = 0;
+				}
+		}
 		if(s =="END")
 		{
 			if(asdf == 1)
-				cout << i << endl;
+				cout << "Balanced:" << i << endl;
 			count--;
 			break;
 		}
 
 	}
 	
-	cout << "PU6KI" << count << endl;
+	if(x>0){cout << "PU6KI" << count << endl;}
 	
 	
 	return 0;
