@@ -12,14 +12,7 @@ public:
 		size_(0),
 		buffer_(new char)
 		{}
-	~String()
-	{
-		delete this;
-		/*/while(!empty())
-		{
-			snibbety_snab();	
-		}/*/
-	}
+	
 	int size()
 	{
 		return size_;
@@ -44,10 +37,7 @@ public:
 	
 	void operator=(const String& other)
 	{
-		while(!empty())
-		{
-			snibbety_snab();	
-		}
+		size_ = 0;
 		for(int i = 0; i < other.size_; i++)
 		{
 			add_char(other.buffer_+	i);
@@ -88,15 +78,16 @@ int main()
 	{
 		s2.add_char('b');
 	}
-	for(int i = 0; i < 	55; i++)
+	for(int i = 0; i < 	5; i++)
 	{
 		s3.add_char('c');
 	}
 	cout << s.size() << endl;
-	s.~String();
-	s2.~String();
-	s3.~String();
-	cout << endl;
-	cout << endl;
-	cout << endl;
+	cout << s << endl;
+	s+=s2;
+	cout << s.size() << endl;
+	cout << s << endl;
+	s=s3;
+	cout << s.size() << endl;
+	cout << s << endl;
 }
