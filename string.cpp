@@ -14,10 +14,11 @@ public:
 		{}
 	~String()
 	{
-		while(!empty())
+		delete this;
+		/*/while(!empty())
 		{
 			snibbety_snab();	
-		}
+		}/*/
 	}
 	int size()
 	{
@@ -87,7 +88,7 @@ int main()
 	{
 		s2.add_char('b');
 	}
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 	55; i++)
 	{
 		s3.add_char('c');
 	}
