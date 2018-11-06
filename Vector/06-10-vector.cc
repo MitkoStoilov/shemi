@@ -71,9 +71,17 @@ public:
 		return capacity_;
 	}
 
-	Vector(const Vector& other){
+	Vector(const Vector& other):
+			capacity_(other.capacity_),
+			size_(0),
+			buffer_(new int){
+		while(size_<=other.size_){
+			push_back(other.back());
+			size_++;
+		}
 
 	}
+
 	Vector& operator=(const Vector& other);
 
 	int& operator[](int index){
@@ -125,14 +133,17 @@ int main(){
 
 	cout <<"v[2]= "<< v[2] << endl;
 
+	v.push_back(3);
+
+	const Vector& v1(v);
+
+	cout<< "v.back()= " << v.back() << endl;
+	cout << "v1.back()= "<< v1.back()  << endl;
+
+
 
 	v.~Vector();
 	cout <<"v[2]= "<< v[2] << endl;
-
-	Vector n;
-	n.push_back(9);
-	
-	cout << n[0] << endl;
 
 	return 0;
 }
