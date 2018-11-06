@@ -91,7 +91,6 @@ class Vector
 	
 	Vector& operator=(const Vector& other)
 	{
-		
 		 
 	}
 	
@@ -112,6 +111,7 @@ int main()
 	v.push_back(10);
 	Vector& asdf(v);
 	asdf.pop_back();
+	cout << asdf[0] << endl;
 }
 
 
