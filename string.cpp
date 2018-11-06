@@ -29,8 +29,8 @@ public:
 	}
 	void snibbety_snab()
 	{
-		cout << *(buffer_+size_);
-		free(buffer_ + size_);
+		cout << *(buffer_+size_-1);
+		delete (buffer_ + size_-1);
 		size_ = size_ - 1;
 	}
 	void operator+=(const String& other)
@@ -91,8 +91,11 @@ int main()
 	{
 		s3.add_char('c');
 	}
-	s += s2;
-	cout << s << endl;
 	cout << s.size() << endl;
-	cout << s << endl;
+	s.~String();
+	s2.~String();
+	s3.~String();
+	cout << endl;
+	cout << endl;
+	cout << endl;
 }
