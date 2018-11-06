@@ -29,7 +29,7 @@ public:
 	}
 	void snibbety_snab()
 	{
-		char& a = *(buffer_ + size_-1);
+		char& a = *(buffer_ + size_);
 		a = 0;
 		size_ = size_ - 1;
 		
