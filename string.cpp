@@ -19,13 +19,18 @@ public:
 			snibbety_snab();	
 		}
 	}
+	int size()
+	{
+		return size_;
+	}
 	bool empty() const
 	{
 		return !size_;
 	}
 	void snibbety_snab()
 	{
-		delete (buffer_ + size_);
+		cout << *(buffer_+size_);
+		free(buffer_ + size_);
 		size_ = size_ - 1;
 	}
 	void operator+=(const String& other)
@@ -88,8 +93,6 @@ int main()
 	}
 	s += s2;
 	cout << s << endl;
-	cout << s3 << endl;
-	while(!s.empty())
-		s.snibbety_snab();
+	cout << s.size() << endl;
 	cout << s << endl;
 }
