@@ -10,7 +10,7 @@ int main(){
 	int w_result;
 	int a=0;
 	
-	int fd = open("files.c", O_APPEND);
+	int fd = open("10l.c", O_APPEND);
 	int result = 1;
 	
 	while(result > 0){
