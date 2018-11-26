@@ -8,19 +8,21 @@ class Vector
 	int size_;
 	int* buffer_;
 	
+	friend class iterator;
+	friend class const_iterator;
 	public:
 	
 	Vector():
 		capacity_(10),
 		size_(0),
-		buffer_(new int)
+		buffer_(new int(capacity_))
 	{
 		
 	}
 	Vector(int capacity):
 		capacity_(capacity),
 		size_(0),
-		buffer_(new int)
+		buffer_(new int(capacity_))
 	{
 		
 	}
@@ -52,6 +54,15 @@ class Vector
 	{
 		return *(buffer_ + size_);
 	}
+	int* get_last()
+	{
+		return buffer_ + size_ - 1;
+	}
+	int* get_first()
+	{
+		return buffer_;
+	}
+	
 	int& back()
 	{
 		return *buffer_;
@@ -89,10 +100,6 @@ class Vector
 		}
 	}
 	
-	Vector& operator=(const Vector& other)
-	{
-		 
-	}
 	
 	int& operator[](int index)
 	{
@@ -102,17 +109,196 @@ class Vector
 	{
 		return *(this->buffer_+index);
 	}
+	
+	//------------------------------------------------------------------------------------
+	
+	class riterator
+	{
+		int * current_;
+		friend class Vector;
+		
+	public:
+		riterator(): current_(nullptr){}
+		riterator(int* ptr): current_(ptr){}
+		
+		
+		int operator*()
+		{
+			return *current_;
+		}
+		
+		int* get()
+		{
+			return current_;
+		}
+		
+		riterator& operator++()
+		{
+			current_ = current_ - 1;
+			return *this;
+		}
+		
+		riterator operator++(int) {
+			riterator res(current_);
+			current_ = current_ - 1;
+			return res;
+		}
+		
+		bool operator==(const riterator other) const
+		{
+			return this->current_ == other.current_;
+		}
+		
+		bool operator!=(const riterator other) const
+		{
+			return this->current_ != other.current_;
+		}
+		
+	};
+	//----------------------------------------------------------
+	class iterator
+	{
+		int * current_;
+		friend class Vector;
+		
+	public:
+		iterator(): current_(nullptr){}
+		iterator(int* ptr): current_(ptr){}
+		
+		
+		int operator*()
+		{
+			return *current_;
+		}
+		
+		int* get()
+		{
+			return current_;
+		}
+		
+		iterator& operator++()
+		{
+			current_ = current_ + 1;
+			return *this;
+		}
+		
+		iterator operator++(int) {
+			iterator res(current_);
+			current_ = current_ + 1;
+			return res;
+		}
+		
+		bool operator==(const iterator other) const
+		{
+			return this->current_ == other.current_;
+		}
+		
+		bool operator!=(const iterator other) const
+		{
+			return this->current_ != other.current_;
+		}
+		
+	};
+	//----------------------------------------------------------
+	
+	class const_iterator
+	{
+		const int * current_;
+		friend class Vector;
+		
+	public:
+		const_iterator(): current_(nullptr){}
+		const_iterator(const int* ptr): current_(ptr){}
+		
+		
+		const int operator*()
+		{
+			return *current_;
+		}
+		
+		const int* get()
+		{
+			return current_;
+		}
+		
+		bool operator==(const iterator other) const
+		{
+			return this->current_ == other.current_;
+		}
+		
+		bool operator!=(const iterator other) const
+		{
+			return this->current_ != other.current_;
+		}
+		
+	};
+	iterator begin()
+	{
+		return iterator(buffer_);
+	}
+	
+	iterator end()
+	{
+		return iterator(buffer_+size_);
+	}
+	
+	riterator rbegin()
+	{
+		return riterator(buffer_+size_-1);
+	}
+	
+	riterator rend()
+	{
+		return riterator(buffer_-1);
+	}
+	
+	const_iterator cbegin() 
+	{
+		const_iterator iter(buffer_);
+		return iter;
+	}
+	
+	const_iterator cend() 
+	{
+		const_iterator iter(buffer_+size_-1);
+		return iter;
+	}
 };
 
 int main()
 {
 	Vector v;
-	v.push_back(6);
+	v.push_back(5);
 	v.push_back(10);
-	Vector& asdf(v);
-	asdf.pop_back();
-	cout << asdf[0] << endl;
+	v.push_back(15);
+	
+	Vector::iterator current = v.begin();
+	Vector::iterator last = v.end();
+	Vector::riterator rcurrent = v.rbegin();
+	Vector::riterator rlast = v.rend();
+	
+	Vector::const_iterator const_iterator;
+	
+	cout << *current << endl;
+	current++;
+	
+	for(; current!=last; current++)
+	{
+		cout << *current << endl;
+	}
+	
+	for(; rcurrent!=rlast; rcurrent++)
+	{
+		cout<< "reverse:" << *rcurrent << endl;
+	}
+	
+	Vector& asdf = v;
+	
 }
+
+
+
+
 
 
 
