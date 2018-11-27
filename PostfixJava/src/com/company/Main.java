@@ -11,7 +11,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
+        DoubleCalc calc = new DoubleCalc();
         Scanner scan = new Scanner(System.in);
         String s = scan.nextLine();
         Vector<String> parsed = new Vector<String>(100, 100);
