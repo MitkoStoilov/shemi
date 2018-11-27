@@ -37,7 +37,7 @@ public class Card{
 
     public void cout()
     {
-        if(!Character.isLetter(power_))
+        if(power_>= 0 && power_ <= 32)
             System.out.printf("%c%d", color_,(int) power_);
         else
             System.out.printf("%c%c", color_, power_);
