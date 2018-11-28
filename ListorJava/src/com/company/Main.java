@@ -12,9 +12,10 @@ public class Main {
             child.push(i+100);
             childchild.push(i+200);
         }
-        listor.pushListor(10, child);
         child.pushListor(10, childchild);
+        listor.pushListor(10, child);
         listor.cout();
-        System.out.printf("%n%d%n", listor.at(29));
+        System.out.printf("%n");
+        System.out.printf("%d%n", listor.at(40));
     }
 }

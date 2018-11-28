@@ -1,7 +1,7 @@
 package com.company;
 import java.util.*;
 
-public class Listor {
+public class Listor extends Vector{
     public Vector<Integer> data_;
     public HashMap<Integer, Listor> child_ = new HashMap<Integer, Listor>();
 
@@ -32,25 +32,30 @@ public class Listor {
         int sizes = 0;
         for(Map.Entry<Integer, Listor> entry : child_.entrySet())
         {
-            if(entry.getKey() < index)
+
+            if(index > entry.getKey() + entry.getValue().size()) {
+
+                sizes = sizes + entry.getValue().data_.size() + entry.getKey();
+            }
+            if(entry.getKey() <= index && entry.getKey() + entry.getValue().size() > index)
             {
-                sizes = entry.getValue().data_.size();
+                sizes = sizes + entry.getValue().data_.size();
                 current = current + entry.getKey();
-                if(entry.getKey()+entry.getValue().data_.size() > index)
+                if(entry.getKey()+entry.getValue().data_.size() > index-current)
                 {
                     return entry.getValue().at(index-current);
                 }
             }
         }
-        return data_.elementAt(index - sizes);
+        return data_.elementAt(index - sizes - current);
     }
 
-    public Integer size()
+    public int size()
     {
-        Integer size = 0;
+        Integer size = data_.size();
         for(Map.Entry<Integer, Listor> entry : child_.entrySet())
         {
-            size = size = entry.getValue().data_.size();
+            size = size + entry.getValue().data_.size();
         }
         return size;
     }
